@@ -1,2 +1,2 @@
-interest-noawait etc/nginx/locations/http
-interest-noawait etc/nginx/locations/https
+interest-noawait /etc/nginx/locations/http
+interest-noawait /etc/nginx/locations/https
