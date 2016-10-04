@@ -1,0 +1,20 @@
+Source: xivo-nginx
+Section: admin
+Priority: extra
+Maintainer: XiVO Dev Team <dev+pkg@proformatique.com>
+Uploaders: XiVO Builder Team <release@xivo.io>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+
+Package: xivo-nginx
+Architecture: all
+Pre-Depends: dpkg (>= 1.16.1)
+Depends: ${misc:Depends}, nginx-full, xivo-certs
+Replaces: xivo-web-interface (<= 16.13~20161004.141420.044d600)
+Breaks: xivo-web-interface (<= 16.13~20161004.141420.044d600)
+Description: XiVO nginx basic configuration
+ XiVO is a system based on a powerful IPBX, to bring an easy to
+ install solution for telephony and related services.
+ .
+ This package provides a basic configuration for the nginx server
+ used by XiVO.

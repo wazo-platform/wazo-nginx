@@ -1,0 +1,2 @@
+etc/nginx/locations/http
+etc/nginx/locations/https

@@ -1,0 +1,5 @@
+xivo-nginx (16.13~~) xivo-dev; urgency=medium
+
+  * Initial release.
+
+ -- Etienne Lessard <elessard@proformatique.com>  Tue, 04 Oct 2016 11:07:35 -0400
