@@ -1,2 +1,4 @@
-etc/nginx/locations/http
-etc/nginx/locations/https
+etc/nginx/locations/http-available
+etc/nginx/locations/http-enabled
+etc/nginx/locations/https-available
+etc/nginx/locations/https-enabled

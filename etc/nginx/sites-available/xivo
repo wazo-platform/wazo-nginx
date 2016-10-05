@@ -6,7 +6,7 @@ server {
     error_log /var/log/nginx/xivo.error.log;
     root /var/www/html;
 
-    include /etc/nginx/locations/http/*.conf;
+    include /etc/nginx/locations/http-enabled/*;
 }
 
 server {
@@ -17,7 +17,7 @@ server {
     error_log /var/log/nginx/xivo.error.log;
     root /var/www/html;
 
-    include /etc/nginx/locations/https/*.conf;
+    include /etc/nginx/locations/https-enabled/*;
 
     gzip off; # gzipping SSL encripted data is a waste of time
     ssl on;
