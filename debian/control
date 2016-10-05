@@ -9,7 +9,7 @@ Standards-Version: 3.9.6
 Package: xivo-nginx
 Architecture: all
 Pre-Depends: dpkg (>= 1.16.1)
-Depends: ${misc:Depends}, nginx-full, xivo-certs
+Depends: ${misc:Depends}, nginx, xivo-certs
 Replaces: xivo-web-interface (<= 16.13~20161004.141420.044d600)
 Breaks: xivo-web-interface (<= 16.13~20161004.141420.044d600)
 Description: XiVO nginx basic configuration
