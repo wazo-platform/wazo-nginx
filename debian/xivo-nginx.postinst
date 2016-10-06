@@ -3,7 +3,7 @@
 set -e
 
 if [ "$1" = triggered ]; then
-    service nginx reload
+    service nginx reload || true
     exit 0
 fi
 
@@ -11,7 +11,7 @@ case "$1" in
     configure)
         rm -f '/etc/nginx/sites-enabled/default'
 
-        service nginx reload
+        service nginx reload || true
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
