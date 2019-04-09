@@ -9,8 +9,6 @@ Package: xivo-nginx
 Architecture: all
 Pre-Depends: dpkg (>= 1.16.1)
 Depends: ${misc:Depends}, nginx, xivo-certs
-Replaces: xivo-web-interface (<= 16.13~20161004.141420.044d600)
-Breaks: xivo-web-interface (<= 16.13~20161004.141420.044d600)
 Description: Wazo nginx basic configuration
  Wazo is a system based on a powerful IPBX, to bring an easy to
  install solution for telephony and related services.
