@@ -1,4 +1,4 @@
-xivo-nginx (16.13~~) xivo-dev; urgency=medium
+wazo-nginx (16.13~~) xivo-dev; urgency=medium
 
   * Initial release.
 
