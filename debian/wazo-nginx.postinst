@@ -11,6 +11,14 @@ case "$1" in
     configure)
         rm -f '/etc/nginx/sites-enabled/default'
 
+	if [ -f /var/log/nginx/xivo.access.log ]; then
+            rename 's/xivo\.access/wazo.access/g' /var/log/nginx/xivo.access.log*
+	fi
+
+	if [ -f /var/log/nginx/xivo.error.log ]; then
+            rename 's/xivo\.error/wazo.error/g' /var/log/nginx/xivo.error.log*
+	fi
+
         service nginx reload || true
     ;;
 
