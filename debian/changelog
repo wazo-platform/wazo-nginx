@@ -1,3 +1,9 @@
+wazo-nginx (19.12~~) xivo-dev; urgency=medium
+
+  * Initial release.
+
+ -- Frederic Lepied <flepied@wazo.io>  Mon, 05 Aug 2019 20:33:05 +0200
+
 wazo-nginx (16.13~~) xivo-dev; urgency=medium
 
   * Initial release.
