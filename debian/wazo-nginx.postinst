@@ -11,6 +11,7 @@ case "$1" in
     configure)
         rm -f /etc/nginx/sites-enabled/default
 
+        # move files from xivo-nginx
         if [ -f /var/log/nginx/xivo.access.log ]; then
             rename 's/xivo\.access/wazo.access/g' /var/log/nginx/xivo.access.log*
         fi
@@ -24,6 +25,7 @@ case "$1" in
                 /etc/nginx/sites-available/xivo
             mv /etc/nginx/sites-available/xivo /etc/nginx/sites-available/wazo
         fi
+        # End of move files from xivo-nginx
 
         service nginx reload || true
     ;;
