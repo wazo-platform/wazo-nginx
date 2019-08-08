@@ -11,13 +11,13 @@ case "$1" in
     configure)
         rm -f /etc/nginx/sites-enabled/default
 
-	if [ -f /var/log/nginx/xivo.access.log ]; then
+        if [ -f /var/log/nginx/xivo.access.log ]; then
             rename 's/xivo\.access/wazo.access/g' /var/log/nginx/xivo.access.log*
-	fi
+        fi
 
-	if [ -f /var/log/nginx/xivo.error.log ]; then
+        if [ -f /var/log/nginx/xivo.error.log ]; then
             rename 's/xivo\.error/wazo.error/g' /var/log/nginx/xivo.error.log*
-	fi
+        fi
 
         if [ -r /etc/nginx/sites-available/xivo -a -r /etc/nginx/sites-available/wazo ]; then
             sed -i -e "s@\(.*/var/log/nginx/\)xivo\(.*\.log;\)@\1wazo\2@" \
