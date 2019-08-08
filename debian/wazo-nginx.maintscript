@@ -1,0 +1,1 @@
+mv_conffile /etc/nginx/sites-available/xivo /etc/nginx/sites-available/wazo 10.11
