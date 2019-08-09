@@ -1,1 +1,3 @@
 etc/* etc/
+index.wazo.html var/www/html/
+wazo-bird-color.svg var/www/html/
