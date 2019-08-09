@@ -21,13 +21,18 @@
         text-align: center;
       }
       .success{
-        background: #0aa;
-        border: 1px solid #fff;
-        color: #fff;
+        background: #fff;
+        color: #125;
         padding: 15px 20px;
         border-radius: 8px;
         line-height: 1.5em;
         margin-top: 30px;
+        display: flex;
+        align-items: center;
+      }
+      .message{
+        text-align: left;
+        margin-left: 20px;
       }
       .success p{
         margin: 0 auto;
@@ -43,8 +48,11 @@
         <img class="logo-full-svg" src="wazo-bird-color.svg" />
       </span>
       <div class="success">
-        <strong>Wazo Engine Ready</strong>
-        <p>Your Wazo Engine is ready. Use your administration tool to operate it.</p>
+        <img src="success.png" style="width: 50px; height: auto"/>
+        <div class="message">
+          <strong>Wazo Engine Ready</strong>
+          <p>Use your administration tool to operate it.</p>
+        </div>
       </div>
     </header>
   </body>
