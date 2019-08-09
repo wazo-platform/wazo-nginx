@@ -1,8 +1,8 @@
-wazo-nginx (19.12~~) xivo-dev; urgency=medium
+wazo-nginx (19.12~20190805) wazo-dev-stretch; urgency=medium
 
-  * Initial release.
+  * rename xivo-nginx to wazo-nginx
 
- -- Frederic Lepied <flepied@wazo.io>  Mon, 05 Aug 2019 20:33:05 +0200
+ -- Wazo Maintainers <dev+pkg@wazo.community>  Mon, 05 Aug 2019 20:33:05 +0200
 
 wazo-nginx (16.13~~) xivo-dev; urgency=medium
 

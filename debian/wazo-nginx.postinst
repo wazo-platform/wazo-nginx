@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
@@ -9,15 +9,23 @@ fi
 
 case "$1" in
     configure)
-        rm -f '/etc/nginx/sites-enabled/default'
+        rm -f /etc/nginx/sites-enabled/default
 
-	if [ -f /var/log/nginx/xivo.access.log ]; then
+        # move files from xivo-nginx
+        if [ -f /var/log/nginx/xivo.access.log ]; then
             rename 's/xivo\.access/wazo.access/g' /var/log/nginx/xivo.access.log*
-	fi
+        fi
 
-	if [ -f /var/log/nginx/xivo.error.log ]; then
+        if [ -f /var/log/nginx/xivo.error.log ]; then
             rename 's/xivo\.error/wazo.error/g' /var/log/nginx/xivo.error.log*
-	fi
+        fi
+
+        if [ -r /etc/nginx/sites-available/xivo -a -r /etc/nginx/sites-available/wazo ]; then
+            sed -i -e "s@\(.*/var/log/nginx/\)xivo\(.*\.log;\)@\1wazo\2@" \
+                /etc/nginx/sites-available/xivo
+            mv /etc/nginx/sites-available/xivo /etc/nginx/sites-available/wazo
+        fi
+        # End of move files from xivo-nginx
 
         service nginx reload || true
     ;;
