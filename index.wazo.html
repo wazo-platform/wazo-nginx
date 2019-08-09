@@ -3,13 +3,57 @@
   <head>
     <meta charset="utf-8">
     <title>Wazo Engine Ready</title>
+    <style>
+      html{
+        height: 100vh;
+      }
+      body {
+        min-height: 100vh;
+        background: linear-gradient(to bottom, #8cf, #fff);
+        font-family: sans-serif;
+        margin: 0;
+      }
+      .main-header{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+      .success{
+        background: #fff;
+        color: #125;
+        padding: 15px 20px;
+        border-radius: 8px;
+        line-height: 1.5em;
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+      }
+      .message{
+        text-align: left;
+        margin-left: 20px;
+      }
+      .success p{
+        margin: 0 auto;
+      }
+      .success strong {
+        text-transform: uppercase;
+      }
+    </style>
   </head>
-
-  <header class="main-header">
-    <span class="logo-lg">
-      <img class="logo-full-svg" src="/wazo-bird-color.svg" />
-    </span>
-  </header>
-  <h1>Wazo Engine Ready</h1>
-  <p>Your Wazo Engine is ready. Use your administration tool to operate it.</p>
+  <body>
+    <header class="main-header">
+      <span class="logo-lg">
+        <img class="logo-full-svg" src="wazo-bird-color.svg" />
+      </span>
+      <div class="success">
+        <img src="success.png" style="width: 50px; height: auto"/>
+        <div class="message">
+          <strong>Wazo Engine Ready</strong>
+          <p>Use your administration tool to operate it.</p>
+        </div>
+      </div>
+    </header>
+  </body>
 </html>
