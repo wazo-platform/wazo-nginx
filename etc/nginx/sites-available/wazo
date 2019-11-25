@@ -1,9 +1,15 @@
+log_format main
+    '$remote_addr - $remote_user [$time_local] "$request" '
+    '$status $body_bytes_sent "$http_referer" "$http_user_agent" "$sent_http_x_powered_by" '
+    '$request_length $msec $request_time $upstream_addr '
+    '$upstream_response_length $upstream_response_time $upstream_status';
+
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
     server_name $domain;
 
-    access_log /var/log/nginx/wazo.access.log;
+    access_log /var/log/nginx/wazo.access.log main;
     error_log /var/log/nginx/wazo.error.log;
     root /var/www/html;
 
@@ -15,7 +21,7 @@ server {
     listen [::]:443 default_server;
     server_name $domain;
 
-    access_log /var/log/nginx/wazo.access.log;
+    access_log /var/log/nginx/wazo.access.log main;
     error_log /var/log/nginx/wazo.error.log;
     root /var/www/html;
 
