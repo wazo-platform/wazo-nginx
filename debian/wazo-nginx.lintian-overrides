@@ -1,0 +1,2 @@
+# we use files in /var/www
+wazo-nginx: dir-or-file-in-var-www
