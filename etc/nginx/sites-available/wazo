@@ -4,6 +4,11 @@ log_format main
     '$request_length $msec $request_time $upstream_addr '
     '$upstream_response_length $upstream_response_time $upstream_status';
 
+# The noauth zone is meant to be applied to ressources that are unauthenticated
+# Limits are applied to each individual IP addresses. Be careful with this limit
+# a single IP address could be used by many users.
+limit_req_zone $binary_remote_addr zone=noauth:10m rate=25r/s;
+
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
