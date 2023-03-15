@@ -1,8 +1,15 @@
 log_format main
-    '$remote_addr - $remote_user [$time_local] "$request" '
+    '$remote_addr - $remote_user [$time_local] "$customrequest" '
     '$status $body_bytes_sent "$http_referer" "$http_user_agent" "$sent_http_x_powered_by" '
     '$request_length $msec $request_time $upstream_addr '
     '$upstream_response_length $upstream_response_time $upstream_status';
+
+map $request $customrequest {
+        "~^(.*)token=([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4})([a-fA-F0-9]{8})(.*)" "$1token=XXXXXXXX-XXXX-XXXX-XXXX-XXXX$3$4";
+        "~^(.*)\/token\/([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4})([a-fA-F0-9]{8})(.*)" "$1/token/XXXXXXXX-XXXX-XXXX-XXXX-XXXX$3$4";
+        default $request;
+}
+
 
 # The noauth zone is meant to be applied to ressources that are unauthenticated
 # Limits are applied to each individual IP addresses. Be careful with this limit
