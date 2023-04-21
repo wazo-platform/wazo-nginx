@@ -1,4 +1,4 @@
 etc/nginx/locations/http-available
 etc/nginx/locations/http-enabled
-etc/nginx/locations/https-available
+etc/nginx/locations/https-available/all-locations.d
 etc/nginx/locations/https-enabled
