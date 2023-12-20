@@ -11,7 +11,7 @@ Pre-Depends: dpkg (>= 1.16.1), nginx
 Provides: xivo-nginx
 Replaces: xivo-nginx
 Conflicts: xivo-nginx
-Depends: ${misc:Depends}, xivo-certs, rename
+Depends: ${misc:Depends}, wazo-certs, rename
 Description: Wazo nginx basic configuration
  Wazo is a system based on a powerful IPBX, to bring an easy to
  install solution for telephony and related services.
