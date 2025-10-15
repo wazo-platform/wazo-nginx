@@ -1,6 +1,6 @@
 Source: wazo-nginx
 Section: admin
-Priority: extra
+Priority: optional
 Maintainer: Wazo Maintainers <dev.wazo@gmail.com>
 Build-Depends: debhelper (>= 12)
 Standards-Version: 3.9.6
