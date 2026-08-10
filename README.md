@@ -6,6 +6,9 @@ nginx server used by Wazo.
 
 # Logs
 
+External requests (ports 80 and 443) are logged in `wazo.access.log`, internal
+service-to-service requests (loopback only, port 80) in `wazo-internal.access.log`.
+
 The default Wazo log format add additional information about
 response time and status.
 

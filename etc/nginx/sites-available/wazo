@@ -16,6 +16,24 @@ map $request $customrequest {
 # a single IP address could be used by many users.
 limit_req_zone $binary_remote_addr zone=noauth:10m rate=25r/s;
 
+# Entry point for internal service-to-service requests. Address-specific listeners
+# take precedence over the wildcard :80 below, which still redirects to https.
+server {
+    listen 127.0.0.1:80;
+    listen [::1]:80;  # localhost resolves to ::1 first
+    server_name _;
+
+    access_log /var/log/nginx/wazo-internal.access.log main;
+    error_log /var/log/nginx/wazo-internal.error.log;
+
+    # internal requests were sent directly to the service before: no 1m body cap
+    client_max_body_size 0;
+
+    # no wazo-no-auth-shared.conf: its zone keys on the client IP and every internal
+    # client shares 127.0.0.1
+    include /etc/nginx/locations/http-enabled/*;
+}
+
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
