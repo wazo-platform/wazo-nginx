@@ -4,6 +4,29 @@ wazo-nginx
 wazo-nginx is a Debian package that provides a basic configuration for the
 nginx server used by Wazo.
 
+# Certificates
+
+The certificate served on port 443 is configured in
+`/etc/nginx/snippets/wazo-certificate.conf`, so it can be replaced without
+modifying the `wazo` site.
+
+Port 80 serves ACME HTTP-01 challenges from `/var/www/html` and redirects
+everything else to https. To use a Let's Encrypt certificate with certbot:
+
+```
+certbot certonly --webroot -w /var/www/html -d wazo.example.com \
+  --deploy-hook 'systemctl reload nginx'
+```
+
+Then point `/etc/nginx/snippets/wazo-certificate.conf` to it:
+
+```
+ssl_certificate /etc/letsencrypt/live/wazo.example.com/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/wazo.example.com/privkey.pem;
+```
+
+and reload nginx. Renewals (`certbot renew`) then work unattended.
+
 # Logs
 
 External requests (ports 80 and 443) are logged in `wazo.access.log`, internal
