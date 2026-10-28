@@ -1,8 +1,14 @@
 log_format main
     '$remote_addr - $remote_user [$time_local] "$customrequest" '
-    '$status $body_bytes_sent "$http_referer" "$http_user_agent" "$sent_http_x_powered_by" '
+    '$status $body_bytes_sent "$customreferer" "$http_user_agent" "$sent_http_x_powered_by" '
     '$request_length $msec $request_time $upstream_addr '
     '$upstream_response_length $upstream_response_time $upstream_status';
+
+# the Referer can be a provisioning URL, key included
+map $http_referer $customreferer {
+        "~(?i)^(.*?/+device/+provisioning/+)[^/?]*(.*)$" "$1XXXXXXXX$2";
+        default $http_referer;
+}
 
 map $request $tokenmaskedrequest {
         # provisioning key in a request line whose $uri normalized to another path
@@ -31,7 +37,7 @@ map $uri $customrequest {
 # with http_auth_strategy url_key, the first path segment is the key.
 log_format provd
     '$remote_addr - $remote_user [$time_local] "$provdrequest" '
-    '$status $body_bytes_sent "$http_referer" "$http_user_agent" "$sent_http_x_powered_by" '
+    '$status $body_bytes_sent "-" "$http_user_agent" "$sent_http_x_powered_by" '
     '$request_length $msec $request_time $upstream_addr '
     '$upstream_response_length $upstream_response_time $upstream_status';
 
