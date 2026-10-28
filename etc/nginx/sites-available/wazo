@@ -12,12 +12,16 @@ map $http_referer $customreferer {
         default $http_referer;
 }
 
-map $request $tokenmaskedrequest {
-        # provisioning key in a request line whose $uri normalized to another path
+# provisioning key in a request line whose $uri normalized to another path
+map $request $keymaskedrequest {
         "~(?i)^(\S+\s+(?:[a-z][a-z0-9+.-]*://[^/\s]*)?/+device/+provisioning/+)[^/?\s]*(.*)$" "$1XXXXXXXX$2";
+        default $request;
+}
+
+map $keymaskedrequest $tokenmaskedrequest {
         "~^(.*)token=([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4})([a-fA-F0-9]{8})(.*)" "$1token=XXXXXXXX-XXXX-XXXX-XXXX-XXXX$3$4";
         "~^(.*)\/token\/([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4})([a-fA-F0-9]{8})(.*)" "$1/token/XXXXXXXX-XXXX-XXXX-XXXX-XXXX$3$4";
-        default $request;
+        default $keymaskedrequest;
 }
 
 # Requests rejected before their URI was parsed have an empty $uri: mask the
