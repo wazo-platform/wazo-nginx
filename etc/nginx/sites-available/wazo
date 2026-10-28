@@ -4,8 +4,10 @@ log_format main
     '$request_length $msec $request_time $upstream_addr '
     '$upstream_response_length $upstream_response_time $upstream_status';
 
-# the Referer can be a provisioning URL, key included
+# the Referer can be a provisioning URL, key included; mask it all when its path
+# has escapes or dot segments, which could hide one
 map $http_referer $customreferer {
+        "~^[^?#]*(%|/\.)" "XXXXXXXX";
         "~(?i)^(.*?/+device/+provisioning/+)[^/?]*(.*)$" "$1XXXXXXXX$2";
         default $http_referer;
 }
