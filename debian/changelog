@@ -1,3 +1,10 @@
+wazo-nginx (26.11) wazo-dev-bookworm; urgency=medium
+
+  * Mask the wazo-provd provisioning key in access logs and add the provd
+    log format for the plain HTTP provisioning server.
+
+ -- Wazo Maintainers <dev+pkg@wazo.community>  Wed, 28 Oct 2026 09:20:00 +0000
+
 wazo-nginx (19.12~20190805) wazo-dev-stretch; urgency=medium
 
   * rename xivo-nginx to wazo-nginx
