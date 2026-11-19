@@ -57,6 +57,18 @@ map $uri $provdrequest {
 # a single IP address could be used by many users.
 limit_req_zone $binary_remote_addr zone=noauth:10m rate=25r/s;
 
+# Cache of the internal confd users listing (see locations/http-available/wazo-confd).
+# The directory holds personal data: nginx creates it with the worker user only.
+proxy_cache_path /var/cache/nginx/wazo-confd-users
+    levels=1:2 keys_zone=wazo_confd_users:10m max_size=128m inactive=10m
+    use_temp_path=off;
+
+# requests with a uuid filter (favorites) vary too much to be worth caching
+map $arg_uuid $wazo_confd_users_skip {
+    default 1;
+    ""      0;
+}
+
 # Entry point for internal service-to-service requests. Address-specific listeners
 # take precedence over the wildcard :80 below, which still redirects to https.
 server {

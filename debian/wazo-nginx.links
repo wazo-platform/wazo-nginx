@@ -1,1 +1,2 @@
 etc/nginx/sites-available/wazo etc/nginx/sites-enabled/wazo
+etc/nginx/locations/http-available/wazo-confd etc/nginx/locations/http-enabled/wazo-confd
