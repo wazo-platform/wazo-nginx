@@ -59,3 +59,22 @@ goaccess --real-time-html --date-format '%d/%b/%Y' --time-format '%H:%M:%S' \
   --log-format '%h %^ %e [%d:%t %^] "%r" %s %b "%R" "%u" "%^" %^ %^ %^ %v %^ %T %^' \
   /var/log/nginx/wazo.access.log
 ```
+
+# confd users cache
+
+`sites-available/wazo-confd-cache` adds a loopback-only listener
+(`127.0.0.1:9487` and `[::1]:9487`) in front of wazo-confd. It caches
+`GET /1.1/users` for 60 seconds, keyed on the `Wazo-Tenant` header and the
+full URI. Requests with a `uuid` filter and all other paths go to confd
+without cache. The `X-Cache-Status` response header shows `HIT`, `MISS`,
+`BYPASS`, `STALE` or `UPDATING`.
+
+Only wazo-dird must use it. A cache hit does not reach confd, so confd does not
+check the token. The cache is for one tenant and holds directory data (names,
+numbers, e-mail addresses) in `/var/cache/nginx/wazo-confd-users`.
+
+To use it, set `confd.port` to `9487` in the dird `wazo` source and restart
+wazo-dird. To stop, set the port back to `9486`, restart wazo-dird, and remove
+`/etc/nginx/sites-enabled/wazo-confd-cache`.
+
+Test with docker: `tests/test_users_cache.sh [nginx-image]`.
