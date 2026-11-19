@@ -1,0 +1,36 @@
+# Internal confd access with a short cache for GET /1.1/users.
+# Meant for wazo-dird only: a cache hit never reaches confd, so confd does not
+# check the token. This entry is loopback only (see sites-available/wazo).
+# The cache zone and $wazo_confd_users_skip are defined in sites-available/wazo.
+# Point a dird `wazo` source at it with
+# `confd: {host: localhost, port: 80, prefix: /api/confd, https: false}`.
+
+location = /api/confd/1.1/users {
+    proxy_pass http://127.0.0.1:9486/1.1/users;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Script-Name /api/confd;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+
+    # only GET and HEAD are cached: nginx sends other methods to confd
+    proxy_cache wazo_confd_users;
+    # the token is not in the key: dird uses one service token, renewed often
+    proxy_cache_key "$http_wazo_tenant$request_uri";
+    proxy_cache_valid 200 60s;
+    proxy_ignore_headers Cache-Control Expires;
+    proxy_cache_lock on;
+    proxy_cache_use_stale updating error timeout http_500 http_502 http_503 http_504;
+    proxy_cache_bypass $wazo_confd_users_skip;
+    proxy_no_cache $wazo_confd_users_skip;
+
+    add_header X-Cache-Status $upstream_cache_status;
+}
+
+location ^~ /api/confd/ {
+    proxy_pass http://127.0.0.1:9486/;
+    proxy_read_timeout 180s;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Script-Name /api/confd;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
